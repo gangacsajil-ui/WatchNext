@@ -507,7 +507,7 @@ function Dashboard({onLogout}) {
                                         <div className="card-top">
 
                                             <div className="card-icon">
-                                                🍿
+                                                🎬
                                             </div>
 
                                             <div
