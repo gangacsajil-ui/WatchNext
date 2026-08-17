@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -27,6 +26,7 @@ function Dashboard() {
     const toWatch = media.filter((item) => item.status === "Unwatched");
     const watched = media.filter((item) => item.status === "Watched");
 
+    // Add a new movie or show
     const handleAdd = () => {
         const token = localStorage.getItem("token");
 
@@ -55,6 +55,7 @@ function Dashboard() {
         });
     };
 
+    // Update rating
     const handleRating = (id, rating) => {
         const token = localStorage.getItem("token");
 
@@ -81,6 +82,7 @@ function Dashboard() {
         });
     };
 
+    // Mark movie/show as watched
     const handleStatusChange = (id) => {
         const token = localStorage.getItem("token");
 
@@ -107,8 +109,32 @@ function Dashboard() {
         });
     };
 
+    // Delete movie/show
+    const handleDelete = (id) => {
+        const token = localStorage.getItem("token");
+
+        axios.delete(
+            `http://127.0.0.1:8000/api/media/${id}/`,
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            }
+        )
+        .then(() => {
+            setMedia(
+                media.filter((item) => item.id !== id)
+            );
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
+
     return (
         <div>
+
+            <h1>WatchNext</h1>
 
             <h2>Add Movie / Show</h2>
 
@@ -137,8 +163,6 @@ function Dashboard() {
 
             <button onClick={handleAdd}>Add</button>
 
-            <h1>WatchNext</h1>
-
             <h2>To Watch</h2>
 
             {toWatch.length === 0 ? (
@@ -147,9 +171,23 @@ function Dashboard() {
                 toWatch.map((item) => (
                     <div key={item.id}>
                         <h3>{item.title}</h3>
+
                         <p>Type: {item.type}</p>
-                        <button onClick={() => handleStatusChange(item.id)}>
+
+                        <button
+                            onClick={() =>
+                                handleStatusChange(item.id)
+                            }
+                        >
                             Mark as Watched
+                        </button>
+
+                        <button
+                            onClick={() =>
+                                handleDelete(item.id)
+                            }
+                        >
+                            Delete
                         </button>
                     </div>
                 ))
@@ -163,6 +201,7 @@ function Dashboard() {
                 watched.map((item) => (
                     <div key={item.id}>
                         <h3>{item.title}</h3>
+
                         <p>Type: {item.type}</p>
 
                         <div>
@@ -173,15 +212,26 @@ function Dashboard() {
                                         handleRating(item.id, star)
                                     }
                                 >
-                                    {star <= item.rating ? "★" : "☆"}
+                                    {star <= item.rating
+                                        ? "★"
+                                        : "☆"}
                                 </button>
                             ))}
                         </div>
 
                         <p>Rating: {item.rating}/5</p>
+
+                        <button
+                            onClick={() =>
+                                handleDelete(item.id)
+                            }
+                        >
+                            Delete
+                        </button>
                     </div>
                 ))
             )}
+
         </div>
     );
 }
