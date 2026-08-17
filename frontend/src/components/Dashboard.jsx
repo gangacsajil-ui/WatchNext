@@ -81,6 +81,32 @@ function Dashboard() {
         });
     };
 
+    const handleStatusChange = (id) => {
+        const token = localStorage.getItem("token");
+
+        axios.patch(
+            `http://127.0.0.1:8000/api/media/${id}/`,
+            {
+                status: "Watched"
+            },
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            }
+        )
+        .then((response) => {
+            setMedia(
+                media.map((item) =>
+                    item.id === id ? response.data : item
+                )
+            );
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
+
     return (
         <div>
 
@@ -122,6 +148,9 @@ function Dashboard() {
                     <div key={item.id}>
                         <h3>{item.title}</h3>
                         <p>Type: {item.type}</p>
+                        <button onClick={() => handleStatusChange(item.id)}>
+                            Mark as Watched
+                        </button>
                     </div>
                 ))
             )}
