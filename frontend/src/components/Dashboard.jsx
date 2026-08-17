@@ -6,6 +6,10 @@ function Dashboard() {
     const [title, setTitle] = useState("");
     const [type, setType] = useState("Movie");
     const [status, setStatus] = useState("Unwatched");
+    const [editingId, setEditingId] = useState(null);
+    const [editTitle, setEditTitle] = useState("");
+    const [editType, setEditType] = useState("Movie");
+
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -131,6 +135,43 @@ function Dashboard() {
         });
     };
 
+    const handleEdit = (item) => {
+        setEditingId(item.id);
+        setEditTitle(item.title);
+        setEditType(item.type);
+    };
+
+    const handleSaveEdit = (id) => {
+        const token = localStorage.getItem("token");
+
+        axios.patch(
+            `http://127.0.0.1:8000/api/media/${id}/`,
+            {
+                title: editTitle,
+                type: editType
+            },
+            {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            }
+        )
+        .then((response) => {
+            setMedia(
+                media.map((item) =>
+                    item.id === id ? response.data : item
+                )
+            );
+
+            setEditingId(null);
+            setEditTitle("");
+            setEditType("Movie");
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
+
     return (
         <div>
 
@@ -170,25 +211,48 @@ function Dashboard() {
             ) : (
                 toWatch.map((item) => (
                     <div key={item.id}>
-                        <h3>{item.title}</h3>
+                        {editingId === item.id ? (
+                            <div>
+                                <input
+                                    type="text"
+                                    value={editTitle}
+                                    onChange={(e) => setEditTitle(e.target.value)}
+                                />
 
-                        <p>Type: {item.type}</p>
+                                <select
+                                    value={editType}
+                                    onChange={(e) => setEditType(e.target.value)}
+                                >
+                                    <option value="Movie">Movie</option>
+                                    <option value="TV">TV</option>
+                                </select>
 
-                        <button
-                            onClick={() =>
-                                handleStatusChange(item.id)
-                            }
-                        >
-                            Mark as Watched
-                        </button>
+                                <button onClick={() => handleSaveEdit(item.id)}>
+                                    Save
+                                </button>
 
-                        <button
-                            onClick={() =>
-                                handleDelete(item.id)
-                            }
-                        >
-                            Delete
-                        </button>
+                                <button onClick={() => setEditingId(null)}>
+                                    Cancel
+                                </button>
+                            </div>
+                        ) : (
+                            <div>
+                                <h3>{item.title}</h3>
+                                <p>Type: {item.type}</p>
+
+                                <button onClick={() => handleEdit(item)}>
+                                    Edit
+                                </button>
+
+                                <button onClick={() => handleStatusChange(item.id)}>
+                                    Mark as Watched
+                                </button>
+
+                                <button onClick={() => handleDelete(item.id)}>
+                                    Delete
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ))
             )}
@@ -200,34 +264,57 @@ function Dashboard() {
             ) : (
                 watched.map((item) => (
                     <div key={item.id}>
-                        <h3>{item.title}</h3>
+                        {editingId === item.id ? (
+                            <div>
+                                <input
+                                    type="text"
+                                    value={editTitle}
+                                    onChange={(e) => setEditTitle(e.target.value)}
+                                />
 
-                        <p>Type: {item.type}</p>
-
-                        <div>
-                            {[1, 2, 3, 4, 5].map((star) => (
-                                <button
-                                    key={star}
-                                    onClick={() =>
-                                        handleRating(item.id, star)
-                                    }
+                                <select
+                                    value={editType}
+                                    onChange={(e) => setEditType(e.target.value)}
                                 >
-                                    {star <= item.rating
-                                        ? "★"
-                                        : "☆"}
+                                    <option value="Movie">Movie</option>
+                                    <option value="TV">TV</option>
+                                </select>
+
+                                <button onClick={() => handleSaveEdit(item.id)}>
+                                    Save
                                 </button>
-                            ))}
-                        </div>
 
-                        <p>Rating: {item.rating}/5</p>
+                                <button onClick={() => setEditingId(null)}>
+                                    Cancel
+                                </button>
+                            </div>
+                        ) : (
+                            <div>
+                                <h3>{item.title}</h3>
+                                <p>Type: {item.type}</p>
 
-                        <button
-                            onClick={() =>
-                                handleDelete(item.id)
-                            }
-                        >
-                            Delete
-                        </button>
+                                <div>
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                        <button
+                                            key={star}
+                                            onClick={() => handleRating(item.id, star)}
+                                        >
+                                            {star <= item.rating ? "★" : "☆"}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <p>Rating: {item.rating}/5</p>
+
+                                <button onClick={() => handleEdit(item)}>
+                                    Edit
+                                </button>
+
+                                <button onClick={() => handleDelete(item.id)}>
+                                    Delete
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ))
             )}
