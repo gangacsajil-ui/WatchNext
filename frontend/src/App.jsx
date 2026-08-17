@@ -4,18 +4,28 @@ import Dashboard from "./components/Dashboard";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(
-        localStorage.getItem("token") !== null
+        !!localStorage.getItem("token")
     );
+
+    const handleLogin = () => {
+        setIsLoggedIn(true);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+    };
 
     return (
         <div>
             {isLoggedIn ? (
-                <Dashboard />
+                <Dashboard onLogout={handleLogout} />
             ) : (
-                <Login onLogin={() => setIsLoggedIn(true)} />
+                <Login onLogin={handleLogin} />
             )}
         </div>
     );
 }
 
 export default App;
+

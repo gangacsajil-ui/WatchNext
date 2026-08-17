@@ -1,0 +1,516 @@
+/* ================================
+   WATCHNEXT - CINEMATIC DARK THEME
+   ================================ */
+
+.dashboard {
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 45px 30px;
+    background: #0b0b0d;
+    color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+
+    color: #ffffff;
+
+    text-transform: uppercase;
+}
+
+.brand span {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8d8d94;
+    font-weight: 600;
+}
+
+
+/* ================================
+   HEADER
+   ================================ */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 45px;
+    border-bottom: 1px solid #252529;
+    padding-bottom: 25px;
+}
+
+.logout-button {
+    background: #7f2027;
+    color: #ffffff;
+    border: 1px solid #9b2931;
+    padding: 10px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.logout-button:hover {
+    background: #a52a32;
+}
+
+
+.dashboard-header {
+    margin-bottom: 45px;
+    border-bottom: 1px solid #252529;
+    padding-bottom: 25px;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 38px;
+    letter-spacing: -1px;
+    color: #ffffff;
+}
+
+.dashboard-header p {
+    margin-top: 8px;
+    color: #8e8e96;
+    font-size: 15px;
+}
+
+
+/* ================================
+   ADD MOVIE SECTION
+   ================================ */
+
+.add-section {
+    background: #151519;
+    border: 1px solid #26262b;
+    padding: 25px;
+    border-radius: 14px;
+    margin-bottom: 50px;
+}
+
+.add-section h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    color: #ffffff;
+}
+
+.add-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.add-form input,
+.add-form select,
+.edit-form input,
+.edit-form select {
+    background: #0e0e11;
+    color: #ffffff;
+    border: 1px solid #303036;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.add-form input {
+    flex: 1;
+    min-width: 240px;
+}
+
+.add-form input:focus,
+.add-form select:focus,
+.edit-form input:focus,
+.edit-form select:focus {
+    border-color: #b52b32;
+}
+
+
+/* ================================
+   BUTTONS
+   ================================ */
+
+button {
+    border: none;
+    border-radius: 7px;
+    padding: 9px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* Add button */
+
+.add-button {
+    background: #a9272f;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.add-button:hover {
+    background: #c3323a;
+}
+
+
+/* Edit */
+
+.edit-button {
+    background: #25252a;
+    color: #eeeeee;
+    border: 1px solid #3a3a40;
+}
+
+.edit-button:hover {
+    background: #323238;
+}
+
+
+/* Watched */
+
+.watch-button {
+    background: #8f242b;
+    color: #ffffff;
+}
+
+.watch-button:hover {
+    background: #ad2b33;
+}
+
+
+/* Delete */
+
+.delete-button {
+    background: #281518;
+    color: #e58a8f;
+    border: 1px solid #492328;
+}
+
+.delete-button:hover {
+    background: #3a1a1f;
+}
+
+
+/* Save */
+
+.save-button {
+    background: #2f8f57;
+    color: #ffffff;
+}
+
+.save-button:hover {
+    background: #379f63;
+}
+
+
+/* Cancel */
+
+.cancel-button {
+    background: #29292e;
+    color: #dddddd;
+}
+
+
+/* ================================
+   SECTIONS
+   ================================ */
+
+.media-section {
+    margin-bottom: 55px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 23px;
+    color: #ffffff;
+}
+
+.section-heading span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 28px;
+    height: 28px;
+
+    background: #222226;
+    color: #aaaaaf;
+
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+
+/* ================================
+   MOVIE GRID
+   ================================ */
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 22px;
+}
+
+
+/* ================================
+   MOVIE CARD
+   ================================ */
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.rating-badge {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #29292e;
+    border: 2px solid #55555c;
+
+    color: #a5a5aa;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: 0.25s ease;
+}
+
+/* When a rating is given */
+
+.rating-badge.rated {
+    background: #163d29;
+    border-color: #35a866;
+    color: #55c77d;
+
+    box-shadow: 0 0 12px rgba(53, 168, 102, 0.2);
+}
+
+.media-card:hover {
+    transform: translateY(-4px);
+    border-color: #3a3a42;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Movie icon */
+
+.card-icon {
+    font-size: 30px;
+    margin-bottom: 18px;
+}
+
+
+/* Title */
+
+.media-card h3 {
+    margin: 0 0 7px;
+    font-size: 19px;
+    color: #ffffff;
+}
+
+
+/* Movie / TV */
+
+.media-type {
+    color: #85858d;
+    font-size: 13px;
+    margin-bottom: 17px;
+}
+
+
+/* ================================
+   BUTTON GROUP
+   ================================ */
+
+.button-group {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+
+/* ================================
+   RATING
+   ================================ */
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin: 12px 0 5px;
+}
+
+.rating button {
+    background: transparent;
+    color: #f5c451;
+    padding: 2px;
+    font-size: 23px;
+}
+
+.rating button:hover {
+    transform: scale(1.12);
+}
+
+
+/* Rating text */
+
+.rating-text {
+    color: #77777f;
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+
+.media-card {
+    position: relative;
+
+    background: linear-gradient(
+        145deg,
+        #18181d,
+        #111114
+    );
+
+    border: 1px solid #29292f;
+    border-radius: 12px;
+
+    padding: 24px;
+
+    min-height: 180px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45);
+
+    transition: all 0.25s ease;
+}
+
+.media-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #4a4a52;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* ================================
+   GREEN RATING CIRCLE
+   ================================ */
+
+/*
+   This gives the rating area a cinematic
+   green score badge.
+*/
+
+.rating-badge {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #29292e;
+    border: 2px solid #55555c;
+
+    color: #a5a5aa;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: 0.25s ease;
+}
+
+.rating-badge.rated {
+    background: #163d29;
+    border-color: #35a866;
+    color: #55c77d;
+
+    box-shadow: 0 0 12px rgba(53, 168, 102, 0.2);
+}
+
+
+/* ================================
+   EMPTY STATE
+   ================================ */
+
+.empty-message {
+    color: #77777f;
+    background: #121215;
+    border: 1px dashed #29292f;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+}
+
+
+/* ================================
+   EDIT FORM
+   ================================ */
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 700px) {
+
+    .dashboard {
+        padding: 30px 16px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 30px;
+    }
+
+    .add-form {
+        flex-direction: column;
+    }
+
+    .add-form input {
+        width: auto;
+    }
+
+    .media-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
